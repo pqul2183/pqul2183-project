@@ -11,12 +11,17 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
+@RestController
 public class CityController {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+private final CityRepositoryNew cityRepository;
 
-	}
+public CityController(CityRepositoryNew cityRepository) {
+	this.cityRepository = cityRepository;
+}
 
+@GetMapping("/api/cities")
+public List<City> getAllCities() {
+	return cityRepository.findAll();
+}
 }
