@@ -18,7 +18,6 @@ public class DataLoader implements CommandLineRunner {
 	CityRepositoryNew cityRepository;
 	@Override
 	public void run(String... args) throws Exception {
-		// TODO Auto-generated method stub
 		
 		List<City> cities = cityRepository.findAll(); 
 		List<City> newCities = List.of(

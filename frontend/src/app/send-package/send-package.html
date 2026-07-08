@@ -1,0 +1,32 @@
+
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <br>
+  <div>
+    <label for="origin" style="color: white;">Origin city: </label>
+    <select id="origin" formControlName="originCityId">
+      <option [ngValue]="null" disabled>Select origin</option>
+      <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <label for="destination" style="color: white;">Destination city: </label>
+    <select id="destination" formControlName="destinationCityId">
+      <option [ngValue]="null" disabled>Select destination</option>
+      <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
+    </select>
+  </div>
+  <br>
+  <div>
+    <label for="freight" style="color: white;">Freight type: </label>
+    <select id="freight" formControlName="freightType">
+      <option value="AIR">Air</option>
+      <option value="SEA">Sea</option>
+    </select>
+  </div>
+  <br>
+  <button type="submit" [disabled]="submitted">Send package</button>
+</form>
+
+<p *ngIf="successMessage">{{ successMessage }}</p>

@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequestMapping(value = "/", produces = "application/json")
+@RequiredArgsConstructor
 public class CityController {
 
 private final CityRepositoryNew cityRepository;
-
-public CityController(CityRepositoryNew cityRepository) {
-	this.cityRepository = cityRepository;
-}
 
 @GetMapping("/api/cities")
 public List<City> getAllCities() {

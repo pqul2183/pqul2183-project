@@ -1,4 +1,4 @@
-package de.pqul2183.backend;
+package de.pqul2183.backend.entities;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
