@@ -58,7 +58,7 @@ export class SendPackageComponent implements OnInit {
     this.shipmentService.createShipment(payload).subscribe({
       next: (shipment: Shipment) => {
         this.submitted = false;
-        this.successMessage = `Shipment created successfully with estimated delivery ${shipment.estimatedDays ?? '?'} days.`;
+        this.successMessage = `Shipment created successfully. It will take ${shipment.estimatedDays ?? '?'} days to be delivered.`;
         this.form.reset({ freightType: 'AIR' });
       },
       error: () => {
