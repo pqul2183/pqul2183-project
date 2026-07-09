@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ShipmentService } from '../shipment.service';
 import { Shipment } from '../models';
+import { Observable, of } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shipment-oveview',
@@ -12,23 +14,24 @@ import { Shipment } from '../models';
   providers: [DatePipe],
 })
 export class ShipmentOverviewComponent implements OnInit {
-  shipments: Shipment[] = [];
+  shipments$: Observable<Shipment[]> | null = null;
   isLoading = true;
 
   constructor(private shipmentService: ShipmentService) {}
 
   ngOnInit(): void {
-    this.shipmentService.getShipments().subscribe({
-      next: (shipments) => {
-        this.shipments = shipments;
-        this.isLoading = false;
-      },
-      error: () => {
-        this.shipments = [];
-        this.isLoading = false;
-      },
-    });
+    this.loadShipments();
   }
-}
 
-export { ShipmentOverviewComponent as ShipmentOveview };
+  private loadShipments(): void {
+    this.isLoading = true;
+    this.shipments$ = this.shipmentService.getShipments().pipe(
+      catchError(() => of([])),
+      finalize(() => {
+        this.isLoading = false;
+      })
+    );
+  }
+
+  
+}

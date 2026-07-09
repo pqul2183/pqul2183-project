@@ -2,27 +2,29 @@
 
 <p *ngIf="isLoading">Loading shipments...</p>
 
-<table *ngIf="!isLoading && shipments.length > 0">
-  <thead>
-    <tr>
-      <th>Origin</th>
-      <th>Destination</th>
-      <th>Freight Type</th>
-      <th>Est. Days</th>
-      <th>Status</th>
-      <th>Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let shipment of shipments">
-      <td>{{ shipment.originCity?.name }}</td>
-      <td>{{ shipment.destinationCity?.name }}</td>
-      <td>{{ shipment.freightType }}</td>
-      <td>{{ shipment.estimatedDays }}</td>
-      <td>{{ shipment.status }}</td>
-      <td>{{ shipment.createdAt | date:'short' }}</td>
-    </tr>
-  </tbody>
-</table>
+<ng-container *ngIf="!isLoading && (shipments$ | async) as shipments">
+  <table *ngIf="shipments.length > 0">
+    <thead>
+      <tr>
+        <th>Origin</th>
+        <th>Destination</th>
+        <th>Freight Type</th>
+        <th>Est. Days</th>
+        <th>Status</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let shipment of shipments">
+        <td>{{ shipment.originCity?.name }}</td>
+        <td>{{ shipment.destinationCity?.name }}</td>
+        <td>{{ shipment.freightType }}</td>
+        <td>{{ shipment.estimatedDays }}</td>
+        <td>{{ shipment.status }}</td>
+        <td>{{ shipment.createdAt | date:'short' }}</td>
+      </tr>
+    </tbody>
+  </table>
 
-<p *ngIf="!isLoading && shipments.length === 0">No shipments yet</p>
+  <p *ngIf="shipments.length === 0">No shipments yet</p>
+</ng-container>
