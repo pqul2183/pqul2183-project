@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { SendPackageComponent } from './send-package/send-package';
-import { ShipmentOverviewComponent } from './shipment-oveview/shipment-oveview';
+import { ShipmentOveview } from './shipment-oveview/shipment-oveview';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/send', pathMatch: 'full' },
   { path: 'send', component: SendPackageComponent },
-  { path: 'overview', component: ShipmentOverviewComponent },
+  { path: 'overview', component: ShipmentOveview },
 ];

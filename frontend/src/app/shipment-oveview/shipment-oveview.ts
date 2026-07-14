@@ -13,7 +13,7 @@ import { catchError, finalize } from 'rxjs/operators';
   styleUrls: ['./shipment-oveview.scss'],
   providers: [DatePipe],
 })
-export class ShipmentOverviewComponent implements OnInit {
+export class ShipmentOveview  implements OnInit {
   shipments$: Observable<Shipment[]> | null = null;
   isLoading = true;
 
