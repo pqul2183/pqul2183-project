@@ -1,25 +1,26 @@
 
-
 <form [formGroup]="form" (ngSubmit)="submit()">
+  <h2>Send a package</h2>
   <br>
   <div>
-    <label for="origin" style="color: white;">Origin city: </label>
+    <label for="origin" style="color: rgb(255, 255, 255);"></label>
     <select id="origin" formControlName="originCityId">
-      <option [ngValue]="null" disabled>Select origin</option>
+      <option [ngValue]="null" disabled>Select origin city</option>
       <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
     </select>
   </div>
   <br>
   <div>
-    <label for="destination" style="color: white;">Destination city: </label>
+    <label for="destination" style="color: white;"></label>
     <select id="destination" formControlName="destinationCityId">
-      <option [ngValue]="null" disabled>Select destination</option>
+      <option  [ngValue]="null" disabled>Select destination city</option>
       <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
     </select>
   </div>
   <br>
   <div>
     <label for="freight" style="color: white;">Freight type: </label>
+    <br>
     <select id="freight" formControlName="freightType">
       <option value="AIR">Air</option>
       <option value="SEA">Sea</option>
@@ -27,6 +28,9 @@
   </div>
   <br>
   <button type="submit" [disabled]="submitted">Send package</button>
+  <br>
+  <br>
+  <button onclick="window.open('http://localhost:4200/overview','_self')">Shipment overview</button>
 </form>
 
 <p *ngIf="successMessage">{{ successMessage }}</p>

@@ -1,30 +1,41 @@
 <h2>Shipment history</h2>
-
+<br>
+<button onclick="window.open('http://localhost:4200/send','_self')">Back to Shipment-creator</button>
+<br>
+<br>
 <p *ngIf="isLoading">Loading shipments...</p>
 
-<ng-container *ngIf="!isLoading && (shipments$ | async) as shipments">
-  <table *ngIf="shipments.length > 0">
-    <thead>
-      <tr>
-        <th>Origin</th>
-        <th>Destination</th>
-        <th>Freight Type</th>
-        <th>Est. Days</th>
-        <th>Status</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let shipment of shipments">
-        <td>{{ shipment.originCity?.name }}</td>
-        <td>{{ shipment.destinationCity?.name }}</td>
-        <td>{{ shipment.freightType }}</td>
-        <td>{{ shipment.estimatedDays }}</td>
-        <td>{{ shipment.status }}</td>
-        <td>{{ shipment.createdAt | date:'short' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<ng-container *ngIf="!loadError">
+  <ng-container *ngIf="shipments$ | async as shipments; else waitingState">
+    <table *ngIf="shipments.length > 0; else emptyState">
+      <thead>
+        <tr>
+          <th>Origin</th>
+          <th>Destination</th>
+          <th>Freight Type</th>
+          <th>Est. Days</th>
+          <th>Status</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let shipment of shipments">
+          <td>{{ shipment.originCity?.name || '—' }}</td>
+          <td>{{ shipment.destinationCity?.name || '—' }}</td>
+          <td>{{ shipment.freightType || '—' }}</td>
+          <td>{{ shipment.estimatedDays ?? '—' }}</td>
+          <td>{{ shipment.status || '—' }}</td>
+          <td>{{ shipment.createdAt ? (shipment.createdAt | date:'short') : '—' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
 
-  <p *ngIf="shipments.length === 0">No shipments yet</p>
+  <ng-template #emptyState>
+    <p>No shipments yet</p>
+  </ng-template>
+
+  <ng-template #waitingState></ng-template>
 </ng-container>
+
+<p *ngIf="loadError">Unable to load shipments right now.</p>
