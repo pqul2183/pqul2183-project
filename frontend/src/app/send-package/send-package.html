@@ -3,17 +3,19 @@
   <h2>Send a package</h2>
   <br>
   <div>
-    <label for="origin" style="color: rgb(255, 255, 255);"></label>
+    <label for="origin" style="color: rgb(255, 255, 255);">Select Origin City:</label>
+    <br>
     <select id="origin" formControlName="originCityId">
-      <option [ngValue]="null" disabled>Select origin city</option>
+      <option [ngValue]="null" disabled>Origin City</option>
       <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
     </select>
   </div>
   <br>
   <div>
-    <label for="destination" style="color: white;"></label>
+    <label for="destination" style="color: white;">Select Destination City:</label>
+    <br>
     <select id="destination" formControlName="destinationCityId">
-      <option  [ngValue]="null" disabled>Select destination city</option>
+      <option  [ngValue]="null" disabled>Destination City</option>
       <option *ngFor="let city of cities" [value]="city.UUID">{{ city.name }}</option>
     </select>
   </div>
